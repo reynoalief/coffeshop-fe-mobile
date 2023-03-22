@@ -45,13 +45,13 @@
 
 <table border="2">
     <div align="center">
-        <img width="100%" height="100%" src="./src/assets/github/home.png">
-        <img width="100%" height="100%" src="./src/assets/github/Product.png">
-        <img width="100%" height="100%" src="./src/assets/github/Product-detail.png">
-        <img width="100%" height="100%" src="./src/assets/github/Cart.png">
-        <img width="100%" height="100%" src="./src/assets/github/Checkout.png">
-        <img width="100%" height="100%" src="./src/assets/github/Payment.png">
-        <img width="100%" height="100%" src="./src/assets/github/History.png">
+        <img width="50%" height="50%" src="./src/assets/github/home.png">
+        <img width="50%" height="50%" src="./src/assets/github/Product.png">
+        <img width="50%" height="50%" src="./src/assets/github/Product-detail.png">
+        <img width="50%" height="50%" src="./src/assets/github/Cart.png">
+        <img width="50%" height="50%" src="./src/assets/github/Checkout.png">
+        <img width="50%" height="50%" src="./src/assets/github/Payment.png">
+        <img width="50%" height="50%" src="./src/assets/github/History.png">
     </div>
 </table>
 
