@@ -4,12 +4,23 @@
     "slug": "coffeestars",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "We need access to your gallery / camera."
+        }
+      ]
+    ],
+    "icon": "./assets/kopiku.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/kopiku.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": [
       "**/*"
@@ -21,10 +32,19 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.StarsCoffe.coffe"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/kopiku.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "15a07d8d-b91b-443c-8f5e-7f2d18995b1d"
+      }
     }
   }
 }
