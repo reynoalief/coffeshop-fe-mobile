@@ -57,7 +57,7 @@
 
 ## Related Project
 
-- Download apk [`here`](https://expo.dev/artifacts/eas/cVA1FRM4s5gNr57MUUYq19.apk)
+- Download apk [`here`](https://expo.dev/artifacts/eas/ph3c6ch4m1uNR8FyFSuyDo.apk)
 - Backend API Deploy [`here`](https://coffeshop-mobile.up.railway.app/)
 - Backend Repository [`here`](https://github.com/raynoalief/coffeshop_fe_second)
 
