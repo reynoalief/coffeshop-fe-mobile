@@ -38,7 +38,7 @@ export default function EditProfile({ navigation, route }) {
     role: "",
   });
 
-  const URL = `http://192.168.1.22:5000`;
+  const URL = `https://coffeshop-mobile.up.railway.app`;
 
   useEffect(() => {
     const getUser = async () => {
@@ -99,31 +99,37 @@ export default function EditProfile({ navigation, route }) {
   };
 
   const handleEditProfile = () => {
-    const formData = new FormData();
-    formData.append("username", dataInput.username);
-    formData.append("email", dataInput.email);
-    formData.append("phone", dataInput.phone);
-    formData.append("birthday", dataInput.birthday);
-    formData.append("delivery_address", dataInput.delivery_address);
-    formData.append("avatar", {
+    const formDataUser = new FormData();
+    formDataUser.append("username", dataInput.username);
+    formDataUser.append("email", dataInput.email);
+    formDataUser.append("phone", dataInput.phone);
+    formDataUser.append("birthday", dataInput.birthday);
+    formDataUser.append("delivery_address", dataInput.delivery_address);
+    formDataUser.append("avatar", {
       uri: imagePreview,
       name: `profile-${Date.now()}.jpg`,
       type: "image/jpg",
     });
 
-    axios({
-      method: "PATCH",
-      url: `https://coffeshop-mobile.up.railway.app/api/v1/user/${ID}`,
-      data: formData,
+    const config = {
       headers: {
-        "Content-Type": "multipart/form-data",
+        "Content-Type": "multipart/form-data; charset=utf-8;",
       },
-    })
+    };
+
+    axios
+      .patch(
+        `https://coffeshop-mobile.up.railway.app/api/v1/users/${ID}`,
+        formDataUser,
+        config
+      )
       .then((result) => {
+        console.log(result);
         result.data.message;
         ToastAndroid.show(result.data.message, ToastAndroid.SHORT);
       })
       .catch((err) => {
+        console.log(err.message);
         err;
         ToastAndroid.show("Failed to edit profile! 😐", ToastAndroid.SHORT);
       });

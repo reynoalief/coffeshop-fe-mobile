@@ -12,6 +12,7 @@ import commonStyle from "../../src/assets/styles/commonStyle";
 import styles from "./style";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
+import { ScrollView } from "react-native-gesture-handler";
 
 export default function ProductDetail({ route }) {
   const navigation = useNavigation();
@@ -136,40 +137,51 @@ export default function ProductDetail({ route }) {
           />
         </Pressable>
       </View>
-      <View style={styles.imageBox}>
-        <Image
-          style={styles.productImage}
-          source={{
-            uri: `https://coffeshop-mobile.up.railway.app/uploads/images/${detail.images[0].filename}`,
-          }}
-        />
-      </View>
-      <View style={styles.productTitle}>
-        <Text style={styles.productTitleText}>{detail.title}</Text>
-        <Text style={styles.productPriceText}>
-          IDR {numberWithCommas(detail.price)}
-        </Text>
-      </View>
-      <View>
-        <Text style={styles.deliveryInfoText}>Delivery info</Text>
-        <Text style={styles.deliveryInfoSubtext}>
-          Delivered only on {productDetail[0].deliveryInfo.startDay} until{" "}
-          {productDetail[0].deliveryInfo.endDay} from{" "}
-          {productDetail[0].deliveryInfo.startTime} to{" "}
-          {productDetail[0].deliveryInfo.endTime}
-        </Text>
-      </View>
-      <View>
-        <Text style={styles.descriptionText}>Description</Text>
-        <Text style={styles.descriptionSubtext}>{detail.description}</Text>
-      </View>
-      <View style={styles.button}>
-        <TouchableOpacity style={[commonStyle.brownButton]} onPress={storeCart}>
-          <Text style={{ color: "#fff", fontSize: 20, fontWeight: "700" }}>
-            Add to cart
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={styles.imageBox}>
+          <Image
+            style={styles.productImage}
+            source={{
+              uri: `https://coffeshop-mobile.up.railway.app/uploads/images/${detail.images[0].filename}`,
+            }}
+          />
+        </View>
+        <View style={styles.productTitle}>
+          <Text style={styles.productTitleText}>{detail.title}</Text>
+          <Text style={styles.productPriceText}>
+            IDR {numberWithCommas(detail.price)}
           </Text>
-        </TouchableOpacity>
-      </View>
+        </View>
+        <View>
+          <Text style={styles.deliveryInfoText}>Delivery info</Text>
+          <Text style={styles.deliveryInfoSubtext}>
+            Delivered only on {productDetail[0].deliveryInfo.startDay} until{" "}
+            {productDetail[0].deliveryInfo.endDay} from{" "}
+            {productDetail[0].deliveryInfo.startTime} to{" "}
+            {productDetail[0].deliveryInfo.endTime}
+          </Text>
+        </View>
+        <View>
+          <Text style={styles.descriptionText}>Description</Text>
+          <Text style={styles.descriptionSubtext}>{detail.description}</Text>
+        </View>
+        <View style={styles.button}>
+          <TouchableOpacity
+            style={[commonStyle.brownButton]}
+            onPress={storeCart}
+          >
+            <Text
+              style={{
+                color: "#fff",
+                fontSize: 20,
+                fontWeight: "700",
+              }}
+            >
+              Add to cart
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
     </View>
   );
 }

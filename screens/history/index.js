@@ -14,6 +14,7 @@ import {
 import commonStyle from "../../src/assets/styles/commonStyle";
 import styles from "./style";
 import Icon from "@expo/vector-icons/Ionicons";
+import { ScrollView } from "react-native-gesture-handler";
 
 export default function History({ navigation }) {
   const history = [
@@ -46,7 +47,7 @@ export default function History({ navigation }) {
       detailStatus: "Monday at 3 PM",
     },
   ];
-  const URL = `http://192.168.1.22:5000`;
+  const URL = `https://coffeshop-mobile.up.railway.app`;
   const [userID, setUserID] = useState("");
   const [refetch, setRefetch] = useState(false);
   const [isLoading, setIsLoading] = useState(true);

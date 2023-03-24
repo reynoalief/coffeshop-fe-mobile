@@ -15,6 +15,7 @@ import SearchBox from "./SearchBox";
 import ScrollTabCategory from "./ScrollTabCategory";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import NavbarUnlogged from "./NavbarUnlogged";
+import { ScrollView } from "react-native-gesture-handler";
 
 export default function HomePage() {
   const navigation = useNavigation();
@@ -57,37 +58,41 @@ export default function HomePage() {
   return (
     <SafeAreaView style={[commonStyle.bgBase, styles.container]}>
       {navbar}
-      <Text style={[commonStyle.px40, styles.hello]}>
-        {isLogged ? `Hi, ${dataUser?.user?.username}` : "Hi, Customer"}
-      </Text>
-      <View style={[commonStyle.px40]}>
-        <Text
-          style={[styles.title]}
-          onPress={() => setRefetchHome(!refetchHome)}
-        >
-          A good coffee is{"\n"}a good day
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <Text style={[commonStyle.px40, styles.hello]}>
+          {isLogged ? `Hi, ${dataUser?.user?.username}` : "Hi, Customer"}
         </Text>
-      </View>
-      <SearchBox setKeyword={setKeyword} />
-      <ScrollTabCategory
-        setCategory={setCategory}
-        setRefetch={setRefetch}
-        category={category}
-      />
-      <View style={[commonStyle.px40, styles.categoryTitle]}>
-        <Text style={[commonStyle.textBrown, styles.textCategoryTitle]}>
-          {category ? category : "All"}
-        </Text>
-        <Pressable
-          onPress={() =>
-            navigation.navigate("See More Page", { category: category })
-          }
-        >
-          <Text style={[commonStyle.textBrown, styles.seeMore]}>See more</Text>
-        </Pressable>
-      </View>
+        <View style={[commonStyle.px40]}>
+          <Text
+            style={[styles.title]}
+            onPress={() => setRefetchHome(!refetchHome)}
+          >
+            A good coffee is{"\n"}a good day
+          </Text>
+        </View>
+        <SearchBox setKeyword={setKeyword} />
+        <ScrollTabCategory
+          setCategory={setCategory}
+          setRefetch={setRefetch}
+          category={category}
+        />
+        <View style={[commonStyle.px40, styles.categoryTitle]}>
+          <Text style={[commonStyle.textBrown, styles.textCategoryTitle]}>
+            {category ? category : "All"}
+          </Text>
+          <Pressable
+            onPress={() =>
+              navigation.navigate("See More Page", { category: category })
+            }
+          >
+            <Text style={[commonStyle.textBrown, styles.seeMore]}>
+              See more
+            </Text>
+          </Pressable>
+        </View>
 
-      <DisplayProduct keyword={keyword} category={category} />
+        <DisplayProduct keyword={keyword} category={category} />
+      </ScrollView>
     </SafeAreaView>
   );
 }

@@ -59,7 +59,7 @@ export default function DisplayProduct({ keyword, category }) {
     <>
       <FlatList
         horizontal
-        showsHorizontalScrollIndicator={false}
+        showsHorizontalScrollIndicator={true}
         data={dataProducts}
         renderItem={(p) => {
           return (

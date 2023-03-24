@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     width: "100%",
     alignItems: "center",
-    marginBottom: 50,
+    marginBottom: 10,
   },
   headerText: {
     fontSize: 22,

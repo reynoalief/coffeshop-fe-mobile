@@ -122,105 +122,111 @@ export default function Payment({ navigation }) {
         <Text style={styles.headerText}>Payment</Text>
         <Text>{""}</Text>
       </View>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={styles.paymentMethodTitle}>
+          <Text style={styles.paymentMethodTitleText}>Payment Methods</Text>
+        </View>
 
-      <View style={styles.paymentMethodTitle}>
-        <Text style={styles.paymentMethodTitleText}>Payment Methods</Text>
-      </View>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          style={styles.paymentOptionSlider}
+          contentContainerStyle={styles.position}
+        >
+          {paymentMethod.map((i) =>
+            i.image ? (
+              <Image
+                key={i.id}
+                style={{
+                  marginRight: 10,
+                  borderColor: "#6A4029",
+                  borderWidth: 4,
+                  borderRadius: 20,
+                }}
+                source={i.image ? i.image : ""}
+              />
+            ) : (
+              <View key={i.id} style={styles.paymentMethodOther}>
+                <Text style={{ fontSize: 18 }}>{i.method}</Text>
+                <Text style={{ fontSize: 18 }}>{i.payment}</Text>
+              </View>
+            )
+          )}
+        </ScrollView>
 
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        style={styles.paymentOptionSlider}
-        contentContainerStyle={styles.position}
-      >
-        {paymentMethod.map((i) =>
-          i.image ? (
-            <Image
-              key={i.id}
-              style={{
-                marginRight: 10,
-                borderColor: "#6A4029",
-                borderWidth: 4,
-                borderRadius: 20,
-              }}
-              source={i.image ? i.image : ""}
-            />
-          ) : (
-            <View style={styles.paymentMethodOther}>
-              <Text style={{ fontSize: 18 }}>{i.method}</Text>
-              <Text style={{ fontSize: 18 }}>{i.payment}</Text>
+        <ScrollView
+          style={styles.orderInfo}
+          showsVerticalScrollIndicator={false}
+        >
+          {carts.map((ord) => (
+            <View key={ord.idProduct} style={styles.orderItem}>
+              <Text style={{ fontSize: 18, fontWeight: "700" }}>
+                {ord.itemOrder} {ord.titleCart}
+              </Text>
+              <Text style={{ fontSize: 18, fontWeight: "700" }}>
+                IDR {numberWithCommas(ord.priceCart)}
+              </Text>
             </View>
-          )
-        )}
-      </ScrollView>
+          ))}
+        </ScrollView>
 
-      <ScrollView style={styles.orderInfo} showsVerticalScrollIndicator={false}>
-        {carts.map((ord) => (
-          <View key={ord.idProduct} style={styles.orderItem}>
-            <Text style={{ fontSize: 18, fontWeight: "700" }}>
-              {ord.itemOrder} {ord.titleCart}
-            </Text>
-            <Text style={{ fontSize: 18, fontWeight: "700" }}>
-              IDR {numberWithCommas(ord.priceCart)}
+        <View style={styles.totalPaymentBox}>
+          <View style={[styles.totalPayment, { paddingTop: 20 }]}>
+            <Text style={{ fontSize: 18 }}>Subtotal</Text>
+            <Text style={{ fontSize: 18 }}>
+              IDR {numberWithCommas(subTotal)}
             </Text>
           </View>
-        ))}
-      </ScrollView>
+          <View style={[styles.totalPayment, { marginBottom: 10 }]}>
+            <Text style={{ fontSize: 18 }}>Tax</Text>
+            <Text style={{ fontSize: 18 }}>IDR {numberWithCommas(tax)}</Text>
+          </View>
+          <View style={styles.totalPayment}>
+            <Text style={{ fontSize: 20, fontWeight: "700" }}>TOTAL</Text>
+            <Text style={{ fontSize: 20, fontWeight: "700" }}>
+              IDR {numberWithCommas(subTotal + tax)}
+            </Text>
+          </View>
+        </View>
 
-      <View style={styles.totalPaymentBox}>
-        <View style={[styles.totalPayment, { paddingTop: 20 }]}>
-          <Text style={{ fontSize: 18 }}>Subtotal</Text>
-          <Text style={{ fontSize: 18 }}>IDR {numberWithCommas(subTotal)}</Text>
-        </View>
-        <View style={[styles.totalPayment, { marginBottom: 10 }]}>
-          <Text style={{ fontSize: 18 }}>Tax</Text>
-          <Text style={{ fontSize: 18 }}>IDR {numberWithCommas(tax)}</Text>
-        </View>
-        <View style={styles.totalPayment}>
-          <Text style={{ fontSize: 20, fontWeight: "700" }}>TOTAL</Text>
-          <Text style={{ fontSize: 20, fontWeight: "700" }}>
-            IDR {numberWithCommas(subTotal + tax)}
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            Alert.alert("Modal has been closed.");
+            setModalVisible(!modalVisible);
+          }}
+        >
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Text style={styles.modalText}>
+                Payment success! Thank you for your order!
+              </Text>
+              <TouchableOpacity
+                activeOpacity={0.7}
+                style={[styles.button, styles.buttonClose]}
+                onPress={() => {
+                  setModalVisible(!modalVisible);
+                  navigation.navigate("Home Drawer");
+                }}
+              >
+                <Text style={styles.textStyle}>My pleasure.. 😊</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
+
+        <TouchableOpacity
+          activeOpacity={0.7}
+          style={[commonStyle.brownButton]}
+          onPress={handlePayment}
+        >
+          <Text style={{ color: "#fff", fontSize: 20, fontWeight: "700" }}>
+            Pay Now
           </Text>
-        </View>
-      </View>
-
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
-          setModalVisible(!modalVisible);
-        }}
-      >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>
-              Payment success! Thank you for your order!
-            </Text>
-            <TouchableOpacity
-              activeOpacity={0.7}
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => {
-                setModalVisible(!modalVisible);
-                navigation.navigate("Home Drawer");
-              }}
-            >
-              <Text style={styles.textStyle}>My pleasure.. 😊</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </Modal>
-
-      <TouchableOpacity
-        activeOpacity={0.7}
-        style={[commonStyle.brownButton]}
-        onPress={handlePayment}
-      >
-        <Text style={{ color: "#fff", fontSize: 20, fontWeight: "700" }}>
-          Pay Now
-        </Text>
-      </TouchableOpacity>
+        </TouchableOpacity>
+      </ScrollView>
     </View>
   );
 }

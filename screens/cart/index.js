@@ -11,6 +11,7 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import commonStyle from "../../src/assets/styles/commonStyle";
 import styles from "./style";
+import { ScrollView } from "react-native-gesture-handler";
 export default function Cart() {
   const navigation = useNavigation();
   const carts = [
@@ -79,10 +80,11 @@ export default function Cart() {
         />
         <Text style={{ fontSize: 15 }}>swipe left on item to delete</Text>
       </View>
+
       {dataCart !== null ? (
         <>
           <FlatList
-            showsVerticalScrollIndicator={false}
+            showsVerticalScrollIndicator={true}
             data={dataCart}
             renderItem={({ item }) => {
               return (
